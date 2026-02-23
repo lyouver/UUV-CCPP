@@ -14,7 +14,7 @@
   <arg name="model_name" default="rexrov"/>
   <arg name="model_mode" default="nps_multibeam"/>
   <arg name="use_ned_frame" default="false"/>
-  <arg name="max_forward_speed" default="0.5"/>
+  <arg name="max_forward_speed" default="0.7"/>
   <arg name="example_src_dir" default="/home/tb/dave_ws/src/EROAS-main/example/src"/>
   <arg name="global_waypoints_file" default="$(arg example_src_dir)/scripts/guiji/trajectory_20260206waypoints.yaml"/>
   <!-- Control whether the controller's trajectory_marker_publisher is launched -->
@@ -29,7 +29,7 @@
   <!-- only keep MPC backend -->
   <arg name="mpc_output_topic" default="/$(arg uuv_name)/dp_controller/input_trajectory"/>
   <!-- MPC tracking responsiveness tuning -->
-  <arg name="mpc_max_vel" default="0.5"/>
+  <arg name="mpc_max_vel" default="0.8"/>
   <arg name="mpc_max_acc" default="0.6"/>
   <arg name="mpc_plan_period" default="0.15"/>
   <!-- Use official UUV PID defaults -->

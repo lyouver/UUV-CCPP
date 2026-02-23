@@ -155,7 +155,7 @@
         <!-- Keep oscillation range to +-2 m -->
         <axis>1 0 0</axis>
         <amplitude>2.0</amplitude>
-        <speed>0.2</speed>
+        <speed>2.0</speed>
       </plugin>
       <link name="link">
         <!-- Driven by plugin; keep it from falling under gravity -->
@@ -200,7 +200,7 @@
       <plugin name="sphere_x_oscillator_2" filename="libuuv_oscillating_obstacle_plugin.so">
         <axis>0 1 0</axis>
         <amplitude>1.8</amplitude>
-        <speed>0.2</speed>
+        <speed>1.2</speed>
       </plugin>
       <link name="link">
         <gravity>false</gravity>

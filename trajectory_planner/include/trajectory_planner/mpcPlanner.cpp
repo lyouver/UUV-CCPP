@@ -1108,25 +1108,12 @@ bool mpcPlanner::solveTraj(const std::vector<staticObstacle> &staticObstacles, c
 	}
 
 	void mpcPlanner::getReferenceTraj(std::vector<Eigen::Vector3d>& referenceTraj){
-		referenceTraj.clear();
-		const int horizon = std::max(1, this->horizon_);
-		if (this->inputTraj_.empty()){
-			for (int i = 0; i < horizon; ++i){
-				referenceTraj.push_back(this->currPos_);
-			}
-			return;
-		}
-
-		const int trajSize = int(this->inputTraj_.size());
-		const int searchStart = std::max(0, std::min(this->lastRefStartIdx_, trajSize - 1));
-		const double maxForwardTime = 3.0; // search nearest point within 3s forward window
-		const double tsSafe = std::max(1e-3, this->ts_);
-		const int maxForwardIdx = std::max(1, int(std::round(maxForwardTime / tsSafe)));
-		const int searchEnd = std::min(trajSize - 1, searchStart + maxForwardIdx);
-
+		// find the nearest position in the reference trajectory
 		double leastDist = std::numeric_limits<double>::max();
-		int startIdx = searchStart;
-		for (int i = searchStart; i <= searchEnd; ++i){
+		double maxForwardTime = 3.0; // # 3.0s ahead
+		int maxForwardIdx = maxForwardTime/this->ts_;
+		int startIdx = this->lastRefStartIdx_;
+		for (int i=this->lastRefStartIdx_; i<this->lastRefStartIdx_+maxForwardIdx; ++i){
 			double dist = (this->currPos_ - this->inputTraj_[i]).norm();
 			if (dist < leastDist){
 				leastDist = dist;
@@ -1134,15 +1121,10 @@ bool mpcPlanner::solveTraj(const std::vector<staticObstacle> &staticObstacles, c
 			}
 		}
 		this->lastRefStartIdx_ = startIdx; // update start idx
-
-		// Build reference as:
-		// current vehicle position -> nearest forward global point -> subsequent global points.
-		referenceTraj.reserve(horizon);
-		referenceTraj.push_back(this->currPos_);
-		for (int k = 1; k < horizon; ++k){
-			const int idx = startIdx + (k - 1);
-			if (idx < trajSize){
-				referenceTraj.push_back(this->inputTraj_[idx]);
+		referenceTraj.clear();
+		for (int i=startIdx; i<startIdx+this->horizon_; ++i){
+			if (i < int(this->inputTraj_.size())){
+				referenceTraj.push_back(this->inputTraj_[i]);
 			}
 			else{
 				referenceTraj.push_back(this->inputTraj_.back());

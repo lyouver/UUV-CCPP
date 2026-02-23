@@ -13,27 +13,12 @@ mpc_dt: 0.1
 waypoint_resolution: 0.5
 smooth_global_path: true
 path_lipb_radius: 10.0
-obstacle_timeout: 0.4
+obstacle_timeout: 1.0
 max_obstacles: 8
 default_obstacle_radius: 2.0
 yaw_from_path: true
-max_vel: 0.5
+max_vel: 0.8
 max_acc: 0.6
-publish_epsilon: 0.2
-publish_keepalive: 4.0
-robot_collision_radius: 1.1
-local_trigger_distance: 8.0
-local_release_distance: 10.0
-local_forward_window: 25.0
-local_ignore_behind: 3.0
-local_max_duration: 20.0
-rejoin_hold_time: 2.5
-rejoin_emergency_trigger_distance: 2.5
-global_pass_max_speed: 0.5
-min_dynamic_obstacle_speed: 0.12
-local_clear_confirm_time: 1.0
-rejoin_hold_max_speed: 0.35
-local_rejoin_path_distance_threshold: 1.5
 
 # map_manager params used by internal occMap instance
 occupancy_map/sensor_input_mode: 1
