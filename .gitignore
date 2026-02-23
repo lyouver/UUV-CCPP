@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ROS
+build/
+devel/
+install/
+logs/
+.catkin_tools/
+*.bag
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# 轨迹文件（可选）
+# scripts/guiji/*.yaml
+# scripts/guiji/*.launch
+
+# 系统文件
+.DS_Store
+
+# 编译文件
+*.o
+*.so
+*.dylib
+
+# 日志文件
+*.log
+
+# 临时文件
+.tmp/
+temp/ 

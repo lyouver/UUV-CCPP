@@ -1,0 +1,14 @@
+<launch>
+	<!-- Publish a static parent->map transform so RViz can resolve frame=map topics -->
+	<arg name="publish_map_frame_tf" default="true" />
+	<arg name="map_parent_frame" default="world" />
+	<arg name="map_child_frame" default="map" />
+	<rosparam file="$(find map_manager)/cfg/dynamic_map_param.yaml" ns="/dynamic_map"  />
+	<rosparam file="$(find onboard_detector)/cfg/detector_param.yaml" ns="/onboard_detector" />
+	<node if="$(arg publish_map_frame_tf)"
+	      pkg="tf2_ros"
+	      type="static_transform_publisher"
+	      name="dynamic_map_frame_tf"
+	      args="0 0 0 0 0 0 $(arg map_parent_frame) $(arg map_child_frame)" />
+	<node pkg="map_manager" type="dynamic_map_node" name="dynamic_map_node" output="screen" />
+</launch>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="obstacles">
+    <static>true</static>
+  </model>
+</sdf>

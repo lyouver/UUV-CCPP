@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>trajectory_planner</name>
+  <version>1.0.0</version>
+  <description>The trajectory_planner package</description>
+  <maintainer email="zhefan@andrew.cmu.edu">Zhefan Xu</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>octomap_ros</build_depend>
+  <build_depend>global_planner</build_depend>
+  <build_depend>map_manager</build_depend>
+  <build_depend>dynamic_predictor</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>octomap_ros</build_export_depend>
+  <build_export_depend>global_planner</build_export_depend>
+  <build_export_depend>map_manager</build_export_depend>
+  <build_export_depend>dynamic_predictor</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>octomap_ros</exec_depend>
+  <exec_depend>global_planner</exec_depend>
+  <exec_depend>map_manager</exec_depend>
+  <exec_depend>dynamic_predictor</exec_depend>
+
+  <export>
+
+  </export>
+</package>

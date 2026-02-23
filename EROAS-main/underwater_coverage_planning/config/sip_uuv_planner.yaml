@@ -1,0 +1,46 @@
+# SIP-style iterative UUV coverage planner defaults.
+# Use with:
+#   ./interactive_sip_coverage_planner.py --config ../config/sip_uuv_planner.yaml
+
+x_min: -65.0
+x_max: 65.0
+y_min: -60.0
+y_max: 60.0
+z_min: -25.0
+z_max: 2.0
+
+crop_x_min: -65.0
+crop_x_max: 65.0
+crop_y_min: -60.0
+crop_y_max: 60.0
+
+mesh_scale_factor: 50.0
+mesh_z_offset: -25.0
+terrain_grid_resolution: 0.5
+
+base_standoff_distance: 9.0
+viewpoint_stride: 3
+max_viewpoints: 240
+min_viewpoint_spacing: 3.0
+viewpoint_preferred_clearance: 1.5
+
+resample_iterations: 6
+candidate_standoff_delta: 1.5
+candidate_lateral_jitter: 2.5
+
+use_lkh: true
+use_two_opt: true
+lkh_runs: 1
+lkh_scale: 1000
+fallback_large_cost: 1000000.0
+
+max_forward_speed: 0.8
+max_vertical_speed: 0.25
+max_yaw_rate: 0.25
+max_pitch_deg: 30.0
+yaw_cost_weight: 2.5
+
+terrain_clearance: 0.5
+edge_sample_step: 0.5
+
+auto_open_html: true

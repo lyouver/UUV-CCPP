@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 
+    完整的紧凑水下地形覆盖规划系统 - 对齐官方控制器启动链路：
+    - 环境 + world_ned
+    - 上传模型
+    - 控制器launch负责推进器管理与轨迹可视化
+  -->
+  
+  <!-- 参数设置 -->
+  <arg name="uuv_name" default="rexrov"/>
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="model_name" default="rexrov"/>
+  <arg name="model_mode" default="nps_multibeam"/>
+  <arg name="use_ned_frame" default="false"/>
+  <arg name="max_forward_speed" default="0.7"/>
+  <arg name="example_src_dir" default="/home/tb/dave_ws/src/EROAS-main/example/src"/>
+  <arg name="global_waypoints_file" default="$(arg example_src_dir)/scripts/guiji/trajectory_20260206waypoints.yaml"/>
+  <!-- Control whether the controller's trajectory_marker_publisher is launched -->
+  <arg name="controller_gui" default="true"/>
+  <!-- Official-style world first -->
+  <arg name="start_world" default="true"/>
+  <arg name="use_custom_world" default="true"/>
+  <arg name="use_message_to_tf" default="true"/>
+  <arg name="show_detector_rviz" default="false"/>
+  <!-- compatibility arg: backend selection removed, MPC is always enabled -->
+  <arg name="planner_backend" default="mpc"/>
+  <!-- only keep MPC backend -->
+  <arg name="mpc_output_topic" default="/$(arg uuv_name)/dp_controller/input_trajectory"/>
+  <!-- MPC tracking responsiveness tuning -->
+  <arg name="mpc_max_vel" default="0.8"/>
+  <arg name="mpc_max_acc" default="0.6"/>
+  <arg name="mpc_plan_period" default="0.15"/>
+  <!-- Use official UUV PID defaults -->
+  <arg name="pid_kp" default="11993.888,11993.888,11993.888,19460.069,19460.069,19460.069"/>
+  <arg name="pid_kd" default="9077.459,9077.459,9077.459,18880.925,18880.925,18880.925"/>
+  <arg name="pid_ki" default="321.417,321.417,321.417,2096.951,2096.951,2096.951"/>
+  
+  <!-- 启动Gazebo仿真环境（官方流程：先世界，再机器人） -->
+  <group if="$(arg start_world)">
+    <group if="$(arg use_custom_world)">
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg example_src_dir)/worlds/compact_underwater_terrainqqq.world"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="headless" value="false"/>
+        <arg name="debug" value="false"/>
+        <arg name="verbose" value="false"/>
+      </include>
+    </group>
+    <group unless="$(arg use_custom_world)">
+      <include file="$(find uuv_gazebo_worlds)/launch/empty_underwater_world.launch">
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="gui" value="$(arg gui)"/>
+      </include>
+    </group>
+  </group>
+
+  <!-- 解暂停，与官方一致 -->
+  <include file="$(find uuv_assistants)/launch/unpause_simulation.launch">
+    <arg name="timeout" value="5"/>
+  </include>
+
+  <!-- 发布世界NED坐标系（用于可视化参考） -->
+  <group if="$(arg use_custom_world)">
+    <include file="$(find uuv_assistants)/launch/publish_world_ned_frame.launch"/>
+  </group>
+
+  <!-- 地形模型发布已禁用：仅保留圆柱障碍物用于避障测试 -->
+
+  <!-- 启动RexROV机器人（NED），使用 example/src/robots 下的 xacro -->
+  <group ns="$(arg uuv_name)">
+    <group if="$(arg use_ned_frame)">
+      <param name="robot_description"
+        command="$(find xacro)/xacro '$(arg example_src_dir)/robots/rexrov_defaulter.xacro' --inorder
+          debug:=0
+          namespace:=$(arg uuv_name)
+          inertial_reference_frame:=world_ned" />
+    </group>
+
+    <group unless="$(arg use_ned_frame)">
+      <param name="robot_description"
+        command="$(find xacro)/xacro '$(arg example_src_dir)/robots/rexrov_defaulter.xacro' --inorder
+          debug:=0
+          namespace:=$(arg uuv_name)
+          inertial_reference_frame:=world" />
+    </group>
+
+    <node name="urdf_spawner" pkg="uuv_descriptions" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -x -30 -y -2 -z -2.5 -R 0 -P 0 -Y 1.57079632679 -model $(arg uuv_name) -param /$(arg uuv_name)/robot_description"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen">
+      <param name="robot_description" value="/$(arg uuv_name)/robot_description" />
+      <param name="publish_frequency" value="5" />
+    </node>
+  </group>
+
+  <group if="$(arg use_message_to_tf)">
+    <include file="$(find uuv_assistants)/launch/message_to_tf.launch">
+      <arg name="namespace" value="$(arg uuv_name)"/>
+      <arg name="world_frame" value="world"/>
+      <arg name="odometry_topic" value="/$(arg uuv_name)/pose_gt"/>
+      <arg name="child_frame_id" value="$(arg uuv_name)/base_link"/>
+    </include>
+  </group>
+
+  <group unless="$(arg use_message_to_tf)">
+    <node name="pose_gt_to_tf" pkg="eroas_example" type="pose_gt_to_tf.py" output="screen">
+      <param name="odom_topic" value="/$(arg uuv_name)/pose_gt"/>
+      <param name="frame_id" value="world"/>
+      <param name="child_frame_id" value="$(arg uuv_name)/base_link"/>
+      <!-- Publish direct world -> base_link to avoid TF split trees -->
+      <param name="footprint_frame_id" value="none"/>
+      <param name="stabilized_frame_id" value="none"/>
+      <param name="force_direct" value="true"/>
+      <param name="publish_roll_pitch" value="true"/>
+    </node>
+  </group>
+
+  <!-- 控制器侧启动（官方做法）：包含推进器管理与轨迹可视化（gui_on 时） -->
+  <include file="$(find uuv_trajectory_control)/launch/rov_pid_controller.launch">
+    <arg name="uuv_name" value="$(arg uuv_name)"/>
+    <arg name="gui_on" value="$(arg controller_gui)"/>
+    <arg name="use_ned_frame" value="$(arg use_ned_frame)"/>
+    <arg name="use_params_file" value="false"/>
+    <arg name="Kp" value="$(arg pid_kp)"/>
+    <arg name="Kd" value="$(arg pid_kd)"/>
+    <arg name="Ki" value="$(arg pid_ki)"/>
+  </include>
+
+  <!-- Don't patch uuv_simulator: override the controller's private param from here -->
+  <param name="/$(arg uuv_name)/rov_pid_controller/max_forward_speed" value="$(arg max_forward_speed)"/>
+
+  <!-- 启动RViz（NED配置） -->
+  <node name="rviz" pkg="rviz" type="rviz" output="screen" 
+        args="-d $(arg example_src_dir)/rviz/rexrov_trajectoryer.rviz"
+        launch-prefix="bash -c 'sleep 8; $0 $@' "/>
+
+  <group if="$(arg show_detector_rviz)">
+    <node name="detector_rviz" pkg="rviz" type="rviz" output="screen"
+          args="-d $(find onboard_detector)/rviz/detector.rviz"
+          launch-prefix="bash -c 'sleep 8; $0 $@' "/>
+  </group>
+
+  <!-- MPC adapter (trajectory-topic takeover) -->
+  <node name="mpc_uuv_adapter"
+        pkg="uuv_mpc_adapter"
+        type="mpc_uuv_adapter_node"
+        output="screen">
+    <rosparam file="$(arg example_src_dir)/config/local_mpc_adapter.yaml" command="load"/>
+    <param name="uuv_name" value="$(arg uuv_name)"/>
+    <param name="global_waypoint_file" value="$(arg global_waypoints_file)"/>
+    <param name="output_trajectory_topic" value="$(arg mpc_output_topic)"/>
+    <param name="max_vel" value="$(arg mpc_max_vel)"/>
+    <param name="max_acc" value="$(arg mpc_max_acc)"/>
+    <param name="plan_period" value="$(arg mpc_plan_period)"/>
+  </node>
+
+</launch>

@@ -1,0 +1,1521 @@
+inertial_frame_id: world
+waypoints:
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -23.734211757692528
+  - 0.6230129985173737
+  - 0.2129872184411612
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -23.099901625160893
+  - 0.06924973056312611
+  - 0.4014180487838914
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -20.574150033260086
+  - -2.4265549420533468
+  - -0.40232214122390575
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -13.292278992697488
+  - -5.697327235955191
+  - 2.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -6.681375289661719
+  - -5.279000702511788
+  - 2.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -5.304856509554449
+  - 2.7458693491160506
+  - 2.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -5.064159992054312
+  - 5.007877666444596
+  - 2.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -3.4678873477099517
+  - 12.464132401134565
+  - -2.1308820709403333
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -1.7678626819033754
+  - 15.335570682942535
+  - -4.590491311343386
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 8.871207935295125
+  - 9.580927624809384
+  - -12.108055042770527
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 12.4671903749307
+  - 11.030183508992195
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 13.679103878481769
+  - 14.860107996985583
+  - -15.027609658555486
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 15.041557269426162
+  - 18.977331481966157
+  - -14.843952456099812
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 16.20564566170333
+  - 23.114221295412015
+  - -14.333845271895372
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 20.341205100218456
+  - 22.227205887075677
+  - -15.045681075426836
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 20.465877254803974
+  - 19.028869767983753
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 18.904198110103607
+  - 16.404198110103607
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 21.528869767983753
+  - 11.154855291048685
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 21.778214077154797
+  - 8.530183508992195
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 20.341205100218456
+  - 3.156167479852835
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 26.902887225151062
+  - 3.2808383305867515
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 32.152230540911354
+  - 3.156167479852835
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 33.33989520867665
+  - 11.154855291048685
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 36.08923852443695
+  - 11.030183508992195
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 37.276902198791504
+  - 19.028869767983753
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 42.52624750137329
+  - 28.21522355079651
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 44.087926149368286
+  - 30.839895208676655
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 41.46325449148814
+  - 36.08923852443695
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 38.713911175727844
+  - 38.713911175727844
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 36.08923852443695
+  - 41.46325449148814
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 32.152230540911354
+  - 36.08923852443695
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 28.21522355079651
+  - 30.71522355079651
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 16.405220358128947
+  - 35.77895274123848
+  - -11.597965946726925
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 13.101516502548028
+  - 34.09773430561813
+  - -11.865586849682662
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 8.578992228483164
+  - 32.286041361458395
+  - -12.848559195075222
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 2.555471168667478
+  - 28.621190810043636
+  - -13.162392491922471
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 1.4260232411349678
+  - 29.8266703163114
+  - -11.57447414987479
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -1.8319421086699803
+  - 33.76312961075084
+  - -11.036315714477883
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -5.593196197308123
+  - 38.24543694139512
+  - -11.52829716761671
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -14.204033438237518
+  - 40.62609002154984
+  - -10.250222841429695
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -17.584782255923887
+  - 36.1274022707562
+  - -7.866503833606064
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -19.402523056438955
+  - 33.36218451006552
+  - -6.582575389452742
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -19.626018678997482
+  - 29.721941931226983
+  - -4.669722266427826
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -19.194720525835464
+  - 28.848176488562952
+  - -4.8510795472169335
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -21.514438079218305
+  - 26.31375930675829
+  - -2.581229360586736
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -22.7958344095202
+  - 23.62825467168994
+  - 0.2663968244768835
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -23.596619355137513
+  - 21.24383048074409
+  - 2.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -32.176410170902464
+  - 18.383452614615504
+  - 1.2608169118897006
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -35.786316486130644
+  - 19.689463642656314
+  - 0.8741146376601767
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -41.60847482929921
+  - 21.221092156781165
+  - 0.002031903151049619
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -49.957143000698125
+  - 29.533370687606286
+  - -5.090892950002006
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -51.60014768411285
+  - 31.825606627241264
+  - -5.736723225172617
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -54.194888804030484
+  - 33.20710123951403
+  - -5.986604206353843
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -54.39740259808863
+  - 36.94257697583631
+  - -7.811839848207905
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -54.60401335711074
+  - 45.10946425265011
+  - -9.512466573826517
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -58.151090210307885
+  - 51.81520525467834
+  - -7.276583977947469
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -53.484316239283174
+  - 57.73074349128076
+  - -12.409906574887923
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -46.587926149368286
+  - 56.96193218231201
+  - -13.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -40.02624750137329
+  - 55.898932218551636
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -34.776902198791504
+  - 53.27426552772522
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -34.652230540911354
+  - 50.52493214607239
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -42.13147008446918
+  - 47.49200167821954
+  - -16.216796041576426
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -42.579851916568295
+  - 47.38007316697713
+  - -16.25067156126545
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -43.70705766135766
+  - 43.3078224032618
+  - -14.703276562082461
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -44.272228314075285
+  - 42.136626041334395
+  - -13.849569148114808
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -41.04261958984041
+  - 37.411899458079574
+  - -10.32033748787091
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -40.934762018784745
+  - 36.206001682075886
+  - -8.850748551866726
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -38.99689477875042
+  - 35.595453773966355
+  - -8.248649315431475
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -33.70660779725184
+  - 39.420624635474965
+  - -11.096961486123906
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -24.572685968804908
+  - 46.489736945296315
+  - -15.466987090109328
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -26.244725689991004
+  - 51.93542968943212
+  - -16.000671559653956
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -28.21522355079651
+  - 55.898932218551636
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -25.465877254803974
+  - 55.77426552772522
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -20.341205100218456
+  - 56.0184187562671
+  - -15.460851095091858
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -16.404198110103607
+  - 55.898932218551636
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -14.469326651521662
+  - 55.82606997950994
+  - -16.211358803744055
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -7.903225350002561
+  - 53.648468082581104
+  - -13.094843597422967
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -5.9494201745426984
+  - 54.21494272141957
+  - -12.999460517536548
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -3.2808383305867515
+  - 57.211265563964844
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 4.274492869516674
+  - 57.45612915917424
+  - -15.265275795432075
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 8.530183508992195
+  - 57.211265563964844
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 11.154855291048685
+  - 56.96193218231201
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 16.404198110103607
+  - 54.531150450073746
+  - -15.226935327782366
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 19.672073375407493
+  - 53.58364947439434
+  - -15.590524024923965
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 23.350388480467835
+  - 51.292468570792984
+  - -15.150653253092713
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 27.78341435945916
+  - 50.525467453388686
+  - -15.518990021271478
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 34.776902198791504
+  - 51.96193218231201
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 42.65091915925344
+  - 50.40026247501373
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 47.90026247501373
+  - 53.27426552772522
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 54.46193218231201
+  - 57.211265563964844
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 53.52428675273287
+  - 50.40197582640921
+  - -16.75488641609455
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 53.5754207799472
+  - 47.90026247501373
+  - -15.877989835314791
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 53.02493214607239
+  - 38.713911175727844
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 60.77399128008992
+  - 35.25820022043811
+  - -15.113253569904423
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 55.898932218551636
+  - 30.839895208676655
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 54.337265491485596
+  - 28.21522355079651
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 50.40026247501373
+  - 20.341205100218456
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 54.46193218231201
+  - 20.465877254803974
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 59.711265563964844
+  - 17.841205100218456
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 59.83595013618469
+  - 15.09186178445816
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 57.63950771639568
+  - 11.794128036095543
+  - -14.309053737574654
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 56.34908252803207
+  - 8.344088241982941
+  - -13.981813297505372
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 52.55602939085906
+  - 3.576075951314296
+  - -13.12035770041417
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 50.560837039941035
+  - 4.1576219196146535
+  - -14.690779700721635
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 46.35184272627277
+  - 6.1375660764694775
+  - -15.966751420608388
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 42.65091915925344
+  - 8.654855291048685
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 38.713911175727844
+  - 0.7808383305867515
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 36.18649265719581
+  - -2.8363422058042933
+  - -15.166484358332683
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 34.776902198791504
+  - -3.2808383305867515
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 30.71522355079651
+  - -7.2178468108177185
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 33.44896476072638
+  - -8.163739103331986
+  - -13.475705307200888
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 45.53742319584503
+  - -11.476133687951833
+  - -10.829436797261858
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 47.44998758271352
+  - -12.38287507003187
+  - -10.21055714324073
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 54.510417240284006
+  - -11.73086942735532
+  - -11.026169922586133
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 57.333014205940735
+  - -17.862559726179537
+  - -7.937133249189713
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 58.01812464142494
+  - -21.869847350712476
+  - -7.2588508880709055
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 48.41081354751278
+  - -25.729102063430577
+  - -8.895436956942586
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 50.59366205553895
+  - -29.353323494562662
+  - -11.566896573389943
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 51.837265491485596
+  - -32.80155628015092
+  - -12.946465261724413
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 57.6228402409859
+  - -41.30306514116274
+  - -14.879188949882156
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 58.398932218551636
+  - -42.52624750137329
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 57.06471839142419
+  - -47.79764007450936
+  - -16.014759424045604
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 59.711265563964844
+  - -52.41602942592332
+  - -17.21834187378679
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 60.442874099632675
+  - -55.0768746017966
+  - -17.243502510779432
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 54.30252746299745
+  - -57.421243132938024
+  - -17.026230618967634
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 51.721246605777864
+  - -57.045101197722346
+  - -17.074503753960112
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 48.05224191338753
+  - -59.6245257827881
+  - -17.356346325901107
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 48.561686121798935
+  - -51.78784770005953
+  - -17.068686362769203
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 47.19951624973864
+  - -44.77336490166061
+  - -16.368863331502922
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 46.587926149368286
+  - -42.52624750137329
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 40.02624750137329
+  - -45.15091915925344
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 33.61200145279405
+  - -49.36707490378647
+  - -14.808505199290977
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 31.039951143174445
+  - -51.411665467019525
+  - -15.324027443727424
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 29.041616567468115
+  - -49.399495491780755
+  - -14.864976529763553
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 21.070643480421456
+  - -43.94664211623111
+  - -16.167599601351572
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 18.904198110103607
+  - -42.65091915925344
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 20.34640121088622
+  - -36.02567205490088
+  - -17.334300272360675
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 25.992457538942865
+  - -35.172437177160724
+  - -17.58469673696424
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 33.20955073907585
+  - -34.65690273753149
+  - -16.393115534202323
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 33.29980217701576
+  - -32.02131418327107
+  - -16.728329924988728
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 31.93921532047014
+  - -23.283986727812604
+  - -15.052113174686019
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 30.619949260651232
+  - -20.561151048243875
+  - -15.010740340444421
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 22.965877254803974
+  - -16.404198110103607
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 21.51567795747999
+  - -15.972855525573658
+  - -16.773677848217012
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 16.404198110103607
+  - -16.528869767983753
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 11.154855291048685
+  - -13.904198110103607
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 11.030183508992195
+  - -11.154855291048685
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 12.59186178445816
+  - -8.530183508992195
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 9.294481706203827
+  - -2.530376872349177
+  - -15.249971563594944
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 7.2178468108177185
+  - -3.156167479852835
+  - -13.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 3.146185749093774
+  - -2.5839328341641377
+  - -7.433692302526373
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 1.7435564362076836
+  - -8.528242929181571
+  - -6.893631603863392
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -0.7524176648696137
+  - -19.477489365654804
+  - -4.022945998485626
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 5.901880266895729
+  - -21.172036803129878
+  - -9.182522113184046
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 9.052964209786811
+  - -23.85018531961194
+  - -11.939940037170542
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 9.143802526997135
+  - -25.44781744422786
+  - -12.252820297493251
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 4.864787605747573
+  - -33.06456244553054
+  - -12.868755649984442
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 3.7313513499090485
+  - -36.91260471566827
+  - -14.324449429413365
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 2.311491005961755
+  - -38.0254393593513
+  - -14.988001047564396
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 2.064184897335835
+  - -41.01342608219648
+  - -17.13834844462592
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 3.2808383305867515
+  - -41.46325449148814
+  - -17.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 3.6999612678777973
+  - -44.006553476191854
+  - -18.23403380703787
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 3.927416961257882
+  - -52.95296768257317
+  - -21.4774522279324
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - 4.7178468108177185
+  - -55.27334935037747
+  - -22.606704165796376
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -7.5294209308526145
+  - -55.01192637013812
+  - -18.697205695194583
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -7.129726391089002
+  - -50.14803404245649
+  - -12.740141554941227
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -5.780838330586752
+  - -46.587926149368286
+  - -11.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -9.071298853917243
+  - -41.767047004433884
+  - -9.680884341777265
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -11.415963154775659
+  - -37.892867395649304
+  - -7.064832971386514
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -12.900734158131339
+  - -36.31334470341212
+  - -5.9290421087079395
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -14.695625018067144
+  - -32.77006057118631
+  - -5.503511758161362
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -19.022785989509366
+  - -22.79668171880428
+  - -5.649830984901122
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -23.13851163585028
+  - -25.542193637473176
+  - -5.4138809638022
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -30.77118962558305
+  - -27.48610900871452
+  - -4.476006382222547
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -32.60425846358238
+  - -25.725432075406516
+  - -5.166611760994975
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -31.948083901584702
+  - -18.617184113310124
+  - -6.531403482808798
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -34.27866080365739
+  - -18.13297991939388
+  - -6.58321145569288
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -34.65967107346864
+  - -20.114375331731658
+  - -6.436428902053167
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -34.89018500713592
+  - -20.370696565467114
+  - -5.9938025735361675
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -37.301784834197555
+  - -21.397030609516282
+  - -7.350114349852625
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -39.6465181681112
+  - -23.806660879867326
+  - -9.013070662616498
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -44.005702597484095
+  - -32.787203339639035
+  - -12.37144308454129
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -45.27002182143816
+  - -37.08778784159982
+  - -13.703790675681113
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -45.40026247501373
+  - -40.02624750137329
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -37.311208681668134
+  - -46.280107609733655
+  - -14.432909517511789
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -36.83923568688147
+  - -46.2688808517463
+  - -14.616270176954774
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -32.19450833412492
+  - -42.67827858600236
+  - -13.132657258013804
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -25.727842476746016
+  - -39.6467213829144
+  - -13.495891982282242
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -25.340424475245367
+  - -40.085671303586814
+  - -13.87106374017372
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -32.152230540911354
+  - -53.27426552772522
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -38.713911175727844
+  - -57.211265563964844
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -44.75660739536629
+  - -57.67447872664467
+  - -14.179709712517196
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -54.88781166446889
+  - -58.89409930317454
+  - -14.733123760123664
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -59.83595013618469
+  - -58.398932218551636
+  - -14.5
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -55.898932218551636
+  - -50.52493214607239
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -54.337265491485596
+  - -46.587926149368286
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -54.46193218231201
+  - -45.15091915925344
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -57.211265563964844
+  - -40.02624750137329
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -59.83595013618469
+  - -34.776902198791504
+  - -16.0
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -61.06984895026001
+  - -29.652230540911354
+  - -15.166717835720346
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -61.14830136299133
+  - -25.35103937272366
+  - -14.420159215556014
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -53.78486471492233
+  - -18.34073609273431
+  - -11.090458761938063
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -49.477468791509146
+  - -12.435652138061164
+  - -8.989080941134175
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -53.27293805595237
+  - -1.4755961536646136
+  - -9.998133964007305
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -55.2013397327794
+  - 4.294208593909401
+  - -9.675588238892603
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -56.55062144681477
+  - 6.701017930090263
+  - -9.976305685179668
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -59.939631980745396
+  - 15.744067935301269
+  - -8.372807413759421
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -59.37824975224129
+  - 9.583969494144299
+  - -11.14975330677401
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -61.14830136299133
+  - 1.2271450670903956
+  - -16.326304542282983
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -55.94599771738776
+  - -3.8355296456673056
+  - -17.91595895328622
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -55.57652622664788
+  - -3.8801193576743134
+  - -18.04033860316518
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -47.65075344218109
+  - -3.5748813631666803
+  - -14.32124700691293
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -45.060376515086325
+  - -1.0433003461782575
+  - -14.06271288641704
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -42.21554474694689
+  - -0.6900679319666145
+  - -12.081217535655588
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -36.770140397211144
+  - 0.43734817373754287
+  - -8.005870920416424
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -37.09739004733989
+  - 0.3796402127445746
+  - -7.346884008380522
+  use_fixed_heading: false
+- heading: 0.0
+  max_forward_speed: 0.8
+  point:
+  - -38.90917709605466
+  - 3.4755765600201043
+  - -3.8831527228007667
+  use_fixed_heading: false

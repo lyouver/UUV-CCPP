@@ -1,0 +1,73 @@
+uuv_name: rexrov
+inertial_frame_id: world
+odom_topic: /rexrov/pose_gt
+detector_velocity_topic: /onboard_detector/velocity_visualizaton
+output_trajectory_topic: /rexrov/dp_controller/input_trajectory
+global_waypoint_file: /home/tb/dave_ws/src/EROAS-main/example/src/scripts/guiji/trajectory_20260206waypoints.yaml
+smoothed_global_path_topic: /nav/global_path
+publish_smoothed_global_path: true
+
+plan_period: 0.15
+trajectory_dt: 0.1
+mpc_dt: 0.1
+waypoint_resolution: 0.5
+smooth_global_path: true
+path_lipb_radius: 10.0
+obstacle_timeout: 1.0
+max_obstacles: 8
+default_obstacle_radius: 2.0
+yaw_from_path: true
+max_vel: 0.8
+max_acc: 0.6
+
+# map_manager params used by internal occMap instance
+occupancy_map/sensor_input_mode: 1
+occupancy_map/localization_mode: 1
+occupancy_map/point_cloud_topic: /no_topic
+occupancy_map/odom_topic: /rexrov/pose_gt
+occupancy_map/robot_size: [1.6, 1.0, 1.0]
+occupancy_map/depth_intrinsics: [554.254691191187, 554.254691191187, 320.5, 240.5]
+occupancy_map/depth_scale_factor: 10.0
+occupancy_map/depth_min_value: 0.2
+occupancy_map/depth_max_value: 20.0
+occupancy_map/depth_filter_margin: 0
+occupancy_map/depth_skip_pixel: 2
+occupancy_map/image_cols: 640
+occupancy_map/image_rows: 480
+occupancy_map/body_to_camera: [1.0, 0.0, 0.0, 0.0,
+                               0.0, 1.0, 0.0, 0.0,
+                               0.0, 0.0, 1.0, 0.0,
+                               0.0, 0.0, 0.0, 1.0]
+occupancy_map/raycast_max_length: 20.0
+occupancy_map/p_hit: 0.70
+occupancy_map/p_miss: 0.35
+occupancy_map/p_min: 0.12
+occupancy_map/p_max: 0.97
+occupancy_map/p_occ: 0.80
+occupancy_map/map_resolution: 1.0
+occupancy_map/ground_height: -40.0
+occupancy_map/map_size: [120.0, 120.0, 80.0]
+occupancy_map/local_update_range: [10.0, 10.0, 10.0]
+occupancy_map/local_bound_inflation: 1.0
+occupancy_map/collision_unknown_as_occupied: false
+occupancy_map/collision_check_radius: 0.6
+occupancy_map/clean_local_map: false
+occupancy_map/prebuilt_map_directory: ""
+occupancy_map/local_map_size: [20.0, 20.0, 10.0]
+occupancy_map/max_height_visualization: 5.0
+occupancy_map/visualize_global_map: false
+occupancy_map/verbose: false
+
+# trajectory_planner MPC params
+mpc_planner/horizon: 30
+mpc_planner/z_range_min: -30.0
+mpc_planner/z_range_max: 5.0
+mpc_planner/static_safety_dist: 2.0
+mpc_planner/dynamic_safety_dist: 4.0
+mpc_planner/static_constraint_slack_ratio: 0.1
+mpc_planner/dynamic_constraint_slack_ratio: 0.2
+mpc_planner/cloud_res: 1.0
+mpc_planner/local_cloud_region_x: 20.0
+mpc_planner/local_cloud_region_y: 10.0
+mpc_planner/ground_height: -30.0
+mpc_planner/ceiling_height: 5.0

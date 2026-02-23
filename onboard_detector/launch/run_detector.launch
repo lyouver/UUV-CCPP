@@ -1,0 +1,15 @@
+<launch>
+	<arg name="show_rviz" default="true" />
+	<!-- When running detector standalone, you can set this true to create map frame -->
+	<arg name="publish_map_frame_tf" default="false" />
+	<arg name="map_parent_frame" default="world" />
+	<arg name="map_child_frame" default="map" />
+	<rosparam file="$(find onboard_detector)/cfg/detector_param.yaml" ns="/onboard_detector" />
+	<node pkg="onboard_detector" type="detector_node" name="detector_node" output="screen" />
+	<node if="$(arg publish_map_frame_tf)"
+	      pkg="tf2_ros"
+	      type="static_transform_publisher"
+	      name="detector_map_frame_tf"
+	      args="0 0 0 0 0 0 $(arg map_parent_frame) $(arg map_child_frame)" />
+	<node if="$(arg show_rviz)" name="detector_rviz" pkg="rviz" type="rviz" args="-d $(find onboard_detector)/rviz/detector.rviz"/>
+</launch>

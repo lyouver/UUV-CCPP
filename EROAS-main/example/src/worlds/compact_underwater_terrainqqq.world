@@ -1,0 +1,272 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="compact_underwater_terrain">
+    
+    <!-- 全局光源 -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- 内联定义的紧凑水域模型 (700x700米) -->
+    <model name="compact_ocean_box">
+      <static>true</static>
+      <link name="link">
+        <!-- 海底基平面 - Z=-25.2 -->
+        <visual name="ground">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 0 -25.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>700 700 .1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/sand.material</uri>
+              <name>UUVSimulator/SandAndStones</name>
+            </script>
+          </material>
+        </visual>
+
+        <collision name="ground">
+          <pose>0 0 -25 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>700 700 .1</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <!-- 水面 - Z=100 -->
+        <visual name="surface">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 0 100 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>700 700 .1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/water.material</uri>
+              <name>UUVSimulator/ClearWater</name>
+            </script>
+          </material>
+        </visual>
+
+        <!-- 主水体 - 从水面到海底底部 -->
+        <visual name="main_water_body">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 0 35 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>700 700 130</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/water.material</uri>
+              <name>UUVSimulator/ClearWater</name>
+            </script>
+          </material>
+        </visual>
+
+        <!-- 北侧水墙 -->
+        <visual name="north">
+          <cast_shadows>false</cast_shadows>
+          <pose>350 0 35 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.1 700 130</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/water.material</uri>
+              <name>UUVSimulator/ClearSeaWall</name>
+            </script>
+          </material>
+        </visual>
+
+        <!-- 南侧水墙 -->
+        <visual name="south">
+          <cast_shadows>false</cast_shadows>
+          <pose>-350 0 35 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>.1 700 130</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/water.material</uri>
+              <name>UUVSimulator/ClearSeaWall</name>
+            </script>
+          </material>
+        </visual>
+
+        <!-- 东侧水墙 -->
+        <visual name="east">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 -350 35 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>700 .1 130</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/water.material</uri>
+              <name>UUVSimulator/ClearSeaWall</name>
+            </script>
+          </material>
+        </visual>
+
+        <!-- 西侧水墙 -->
+        <visual name="west">
+          <cast_shadows>false</cast_shadows>
+          <pose>0 350 35 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>700 .1 130</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/water.material</uri>
+              <name>UUVSimulator/ClearSeaWall</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 地形配置 -->
+    <include>
+      <uri>model://sand_heightmap</uri>
+      <pose>0 0 -25 0 0 0</pose>
+    </include>
+
+    <!-- 球形障碍物：动态障碍，用于局部避障测试 -->
+    <model name="moving_sphere_obstacle">
+      <static>false</static>
+      <pose>-16 -17 -3 0 0 0</pose>
+      <plugin name="sphere_y_oscillator" filename="libuuv_oscillating_obstacle_plugin.so">
+        <!-- Keep oscillation range to +-2 m -->
+        <axis>1 0 0</axis>
+        <amplitude>2.0</amplitude>
+        <speed>2.0</speed>
+      </plugin>
+      <link name="link">
+        <!-- Driven by plugin; keep it from falling under gravity -->
+        <gravity>false</gravity>
+        <kinematic>true</kinematic>
+        <inertial>
+          <mass>50</mass>
+          <inertia>
+            <ixx>2.0</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>2.0</iyy>
+            <iyz>0.0</iyz>
+            <izz>2.0</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.5</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.5</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.8 0.1 0.1 1</ambient>
+            <diffuse>0.8 0.1 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 后段轨迹上的新增动态球障碍 -->
+    <model name="moving_sphere_obstacle_2">
+      <static>false</static>
+      <pose>-51.3 -28.4 -12.0 0 0 0</pose>
+      <plugin name="sphere_x_oscillator_2" filename="libuuv_oscillating_obstacle_plugin.so">
+        <axis>0 1 0</axis>
+        <amplitude>1.8</amplitude>
+        <speed>1.2</speed>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <kinematic>true</kinematic>
+        <inertial>
+          <mass>50</mass>
+          <inertia>
+            <ixx>2.0</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>2.0</iyy>
+            <iyz>0.0</iyz>
+            <izz>2.0</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.5</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.5</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.95 0.65 0.1 1</ambient>
+            <diffuse>0.95 0.65 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 水下海流插件 -->
+    <plugin name="underwater_current_plugin" filename="libuuv_underwater_current_ros_plugin.so">
+      <namespace>hydrodynamics</namespace>
+      <constant_current>
+        <topic>current_velocity</topic>
+        <velocity>
+          <mean>0</mean>
+          <min>0</min>
+          <max>1</max>
+          <mu>0.0</mu>
+          <noiseAmp>0.0</noiseAmp>
+        </velocity>
+        <horizontal_angle>
+          <mean>0</mean>
+          <min>-3.141592653589793238</min>
+          <max>3.141592653589793238</max>
+          <mu>0.0</mu>
+          <noiseAmp>0.0</noiseAmp>
+        </horizontal_angle>
+        <vertical_angle>
+          <mean>0</mean>
+          <min>-3.141592653589793238</min>
+          <max>3.141592653589793238</max>
+          <mu>0.0</mu>
+          <noiseAmp>0.0</noiseAmp>
+        </vertical_angle>
+      </constant_current>
+    </plugin>
+
+    <plugin name="sc_interface" filename="libuuv_sc_ros_interface_plugin.so"/>
+
+  </world>
+</sdf>
