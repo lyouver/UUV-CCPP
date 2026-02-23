@@ -394,7 +394,7 @@ class DPControllerLocalPlanner(object):
         if msg is not None:
             msg.header.frame_id = self.inertial_frame_id
             self._trajectory_msg = msg
-            self._logger.info('Updating the trajectory information')
+            self._logger.debug('Updating the trajectory information')
         else:
             self._trajectory_msg = None
             self._logger.error('Error generating trajectory message')
@@ -539,18 +539,21 @@ class DPControllerLocalPlanner(object):
 
         * `is_on` (*type:* `bool`, *default:* `True`): Station keeping flag
         """
+        if self._station_keeping_on != is_on:
+            self._logger.info('STATION KEEPING MODE = ' + ('ON' if is_on else 'OFF'))
         self._station_keeping_on = is_on
-        self._logger.info('STATION KEEPING MODE = ' + ('ON' if is_on else 'OFF'))
 
     def set_automatic_mode(self, is_on=True):
         """Set automatic mode flag."""
+        if self._is_automatic != is_on:
+            self._logger.info('AUTOMATIC MODE = ' + ('ON' if is_on else 'OFF'))
         self._is_automatic = is_on
-        self._logger.info('AUTOMATIC MODE = ' + ('ON' if is_on else 'OFF'))
 
     def set_trajectory_running(self, is_on=True):
         """Set trajectory tracking flag."""
+        if self._traj_running != is_on:
+            self._logger.info('TRAJECTORY TRACKING = ' + ('ON' if is_on else 'OFF'))
         self._traj_running = is_on
-        self._logger.info('TRAJECTORY TRACKING = ' + ('ON' if is_on else 'OFF'))
 
     def has_started(self):
         """Return if the trajectory interpolator has started generating
@@ -593,7 +596,7 @@ class DPControllerLocalPlanner(object):
         self.set_automatic_mode(True)
         self.set_trajectory_running(True)
         self._smooth_approach_on = False
-        self._logger.info('New trajectory received at ' + str(self._stamp_trajectory_received) + 's')
+        self._logger.debug('New trajectory received at ' + str(self._stamp_trajectory_received) + 's')
         self._update_trajectory_info()
 
     def start_station_keeping(self):
