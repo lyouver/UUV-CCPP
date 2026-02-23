@@ -1098,7 +1098,12 @@ class DPControllerLocalPlanner(object):
             if self._look_ahead_delay > 0:
                 self._this_ref_pnt = self.generate_reference(t + self._look_ahead_delay)
 
-            self._max_time_pub.publish(Float64(self._traj_interpolator.get_max_time() - rospy.get_time()))
+            max_time = self._traj_interpolator.get_max_time()
+            if max_time is None:
+                # Trajectory timing may be unavailable during transition windows.
+                self._max_time_pub.publish(Float64(0.0))
+            else:
+                self._max_time_pub.publish(Float64(max_time - rospy.get_time()))
 
             if not self._traj_running:
                 self._traj_running = True

@@ -178,6 +178,10 @@ class TrajectoryGenerator(object):
             if self._points is None:
                 self._points = list()
                 self._time = list()
+            elif isinstance(self._time, np.ndarray):
+                # Avoid race-related type mismatch when interpolate() runs
+                # while a new trajectory message is being appended.
+                self._time = self._time.tolist()
             if len(self._points) > 1:
                 if pnt.t <= self._points[-1].t:
                     return False
@@ -349,8 +353,7 @@ class TrajectoryGenerator(object):
             if len(self._points) == 0:
                 return None
 
-            if type(self._time) == list:
-                self._time = np.array(self._time)
+            time_array = np.asarray(self._time)
 
             # Interpolate the given trajectory
             self._this_pnt.t = t
@@ -367,7 +370,7 @@ class TrajectoryGenerator(object):
             else:
                 self._has_started = True
                 self._has_finished = False
-                idx = np.argmin(np.abs(self._time - t))
+                idx = np.argmin(np.abs(time_array - t))
                 if idx == 0:
                     self._this_pnt = deepcopy(self._points[0])
                 else:

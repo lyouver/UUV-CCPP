@@ -150,7 +150,7 @@
     <!-- 球形障碍物：动态障碍，用于局部避障测试 -->
     <model name="moving_sphere_obstacle">
       <static>false</static>
-      <pose>-16 -17 -3 0 0 0</pose>
+      <pose>-18.6811993142541 -5.72831446611001 -2.0 0 0 0</pose>
       <plugin name="sphere_y_oscillator" filename="libuuv_oscillating_obstacle_plugin.so">
         <!-- Keep oscillation range to +-2 m -->
         <axis>1 0 0</axis>
@@ -175,63 +175,19 @@
         <collision name="collision">
           <geometry>
             <sphere>
-              <radius>1.5</radius>
+              <radius>1.8</radius>
             </sphere>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <sphere>
-              <radius>1.5</radius>
+              <radius>1.8</radius>
             </sphere>
           </geometry>
           <material>
             <ambient>0.8 0.1 0.1 1</ambient>
             <diffuse>0.8 0.1 0.1 1</diffuse>
-          </material>
-        </visual>
-      </link>
-    </model>
-
-    <!-- 后段轨迹上的新增动态球障碍 -->
-    <model name="moving_sphere_obstacle_2">
-      <static>false</static>
-      <pose>-51.3 -28.4 -12.0 0 0 0</pose>
-      <plugin name="sphere_x_oscillator_2" filename="libuuv_oscillating_obstacle_plugin.so">
-        <axis>0 1 0</axis>
-        <amplitude>1.8</amplitude>
-        <speed>0.2</speed>
-      </plugin>
-      <link name="link">
-        <gravity>false</gravity>
-        <kinematic>true</kinematic>
-        <inertial>
-          <mass>50</mass>
-          <inertia>
-            <ixx>2.0</ixx>
-            <ixy>0.0</ixy>
-            <ixz>0.0</ixz>
-            <iyy>2.0</iyy>
-            <iyz>0.0</iyz>
-            <izz>2.0</izz>
-          </inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry>
-            <sphere>
-              <radius>1.5</radius>
-            </sphere>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <sphere>
-              <radius>1.5</radius>
-            </sphere>
-          </geometry>
-          <material>
-            <ambient>0.95 0.65 0.1 1</ambient>
-            <diffuse>0.95 0.65 0.1 1</diffuse>
           </material>
         </visual>
       </link>

@@ -14,7 +14,7 @@
   <arg name="model_name" default="rexrov"/>
   <arg name="model_mode" default="nps_multibeam"/>
   <arg name="use_ned_frame" default="false"/>
-  <arg name="max_forward_speed" default="0.5"/>
+  <arg name="max_forward_speed" default="0.8"/>
   <arg name="example_src_dir" default="/home/tb/dave_ws/src/EROAS-main/example/src"/>
   <arg name="global_waypoints_file" default="$(arg example_src_dir)/scripts/guiji/trajectory_20260206waypoints.yaml"/>
   <!-- Control whether the controller's trajectory_marker_publisher is launched -->
@@ -29,16 +29,19 @@
   <!-- only keep MPC backend -->
   <arg name="mpc_output_topic" default="/$(arg uuv_name)/dp_controller/input_trajectory"/>
   <!-- MPC tracking responsiveness tuning -->
-  <arg name="mpc_max_vel" default="0.5"/>
-  <arg name="mpc_max_acc" default="0.6"/>
+  <arg name="mpc_max_vel" default="0.8"/>
+  <arg name="mpc_max_acc" default="1.0"/>
   <arg name="mpc_plan_period" default="0.15"/>
   <!-- Use official UUV PID defaults -->
   <arg name="pid_kp" default="11993.888,11993.888,11993.888,19460.069,19460.069,19460.069"/>
   <arg name="pid_kd" default="9077.459,9077.459,9077.459,18880.925,18880.925,18880.925"/>
   <arg name="pid_ki" default="321.417,321.417,321.417,2096.951,2096.951,2096.951"/>
+  <!-- Ensure Gazebo can resolve oscillating obstacle plugin without manual export -->
+  <arg name="gazebo_plugin_path_extra" default="$(env HOME)/dave_ws/devel/lib:$(env HOME)/dave_ws/devel_isolated_uuv/lib"/>
   
   <!-- 启动Gazebo仿真环境（官方流程：先世界，再机器人） -->
   <group if="$(arg start_world)">
+    <env name="GAZEBO_PLUGIN_PATH" value="$(arg gazebo_plugin_path_extra):$(optenv GAZEBO_PLUGIN_PATH)"/>
     <group if="$(arg use_custom_world)">
       <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(arg example_src_dir)/worlds/compact_underwater_terrainqqq.world"/>

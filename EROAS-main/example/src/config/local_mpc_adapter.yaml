@@ -17,23 +17,23 @@ obstacle_timeout: 0.4
 max_obstacles: 8
 default_obstacle_radius: 2.0
 yaw_from_path: true
-max_vel: 0.5
-max_acc: 0.6
+max_vel: 0.8
+max_acc: 1.0
 publish_epsilon: 0.2
 publish_keepalive: 4.0
-robot_collision_radius: 1.1
-local_trigger_distance: 8.0
+robot_collision_radius: 0.6
+local_trigger_distance: 10.0
 local_release_distance: 10.0
-local_forward_window: 25.0
+local_forward_window: 15.0
 local_ignore_behind: 3.0
-local_max_duration: 20.0
-rejoin_hold_time: 2.5
+local_max_duration: 15.0
+rejoin_hold_time: 4.5
 rejoin_emergency_trigger_distance: 2.5
-global_pass_max_speed: 0.5
-min_dynamic_obstacle_speed: 0.12
-local_clear_confirm_time: 1.0
-rejoin_hold_max_speed: 0.35
-local_rejoin_path_distance_threshold: 1.5
+global_pass_max_speed: 0.8
+min_dynamic_obstacle_speed: 0.10
+local_clear_confirm_time: 1.8
+rejoin_hold_max_speed: 0.6
+local_rejoin_path_distance_threshold: 3
 
 # map_manager params used by internal occMap instance
 occupancy_map/sensor_input_mode: 1
@@ -74,11 +74,11 @@ occupancy_map/visualize_global_map: false
 occupancy_map/verbose: false
 
 # trajectory_planner MPC params
-mpc_planner/horizon: 30
+mpc_planner/horizon: 38
 mpc_planner/z_range_min: -30.0
 mpc_planner/z_range_max: 5.0
 mpc_planner/static_safety_dist: 2.0
-mpc_planner/dynamic_safety_dist: 4.0
+mpc_planner/dynamic_safety_dist: 2.0
 mpc_planner/static_constraint_slack_ratio: 0.1
 mpc_planner/dynamic_constraint_slack_ratio: 0.2
 mpc_planner/cloud_res: 1.0
