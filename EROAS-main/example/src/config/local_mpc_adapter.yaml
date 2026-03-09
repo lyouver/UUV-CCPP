@@ -39,8 +39,9 @@ predicted_lateral_speed_ratio: 0.6
 # map_manager params used by internal occMap instance
 occupancy_map/sensor_input_mode: 1
 occupancy_map/localization_mode: 1
-occupancy_map/point_cloud_topic: /no_topic
+occupancy_map/point_cloud_topic: /rexrov/depth_camera/points
 occupancy_map/odom_topic: /rexrov/pose_gt
+occupancy_map/frame_id: world
 occupancy_map/robot_size: [1.6, 1.0, 1.0]
 occupancy_map/depth_intrinsics: [554.254691191187, 554.254691191187, 320.5, 240.5]
 occupancy_map/depth_scale_factor: 10.0

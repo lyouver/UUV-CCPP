@@ -89,6 +89,14 @@ namespace mapManager{
 			}
 		}
 
+		if (not this->nh_.getParam(this->ns_ + "/frame_id", this->frameId_)){
+			this->frameId_ = "world";
+			cout << this->hint_ << ": No frame_id param. Use default: world" << endl;
+		}
+		else{
+			cout << this->hint_ << ": Frame id: " << this->frameId_ << endl;
+		}
+
 		std::vector<double> robotSizeVec (3);
 		if (not this->nh_.getParam(this->ns_ + "/robot_size", robotSizeVec)){
 			robotSizeVec = std::vector<double>{0.5, 0.5, 0.3};
@@ -1224,7 +1232,7 @@ namespace mapManager{
 		depthCloud.width = depthCloud.points.size();
 		depthCloud.height = 1;
 		depthCloud.is_dense = true;
-		depthCloud.header.frame_id = "map";
+		depthCloud.header.frame_id = this->frameId_;
 
 		for (int x=minRangeIdx(0); x<=maxRangeIdx(0); ++x){
 			for (int y=minRangeIdx(1); y<=maxRangeIdx(1); ++y){
@@ -1269,17 +1277,17 @@ namespace mapManager{
 		mapCloud.width = mapCloud.points.size();
 		mapCloud.height = 1;
 		mapCloud.is_dense = true;
-		mapCloud.header.frame_id = "map";
+		mapCloud.header.frame_id = this->frameId_;
 
 		inflatedMapCloud.width = inflatedMapCloud.points.size();
 		inflatedMapCloud.height = 1;
 		inflatedMapCloud.is_dense = true;
-		inflatedMapCloud.header.frame_id = "map";
+		inflatedMapCloud.header.frame_id = this->frameId_;
 
 		exploredMapCloud.width = exploredMapCloud.points.size();
 		exploredMapCloud.height = 1;
 		exploredMapCloud.is_dense = true;
-		exploredMapCloud.header.frame_id = "map";
+		exploredMapCloud.header.frame_id = this->frameId_;
 	}
 
 	void occMap::publishProjPoints(){
@@ -1296,7 +1304,7 @@ namespace mapManager{
 		cloud.width = cloud.points.size();
 		cloud.height = 1;
 		cloud.is_dense = true;
-		cloud.header.frame_id = "map";
+		cloud.header.frame_id = this->frameId_;
 
 		sensor_msgs::PointCloud2 cloudMsg;
 		pcl::toROSMsg(cloud, cloudMsg);
@@ -1359,12 +1367,12 @@ namespace mapManager{
 		cloud.width = cloud.points.size();
 		cloud.height = 1;
 		cloud.is_dense = true;
-		cloud.header.frame_id = "map";
+		cloud.header.frame_id = this->frameId_;
 
 		exploredCloud.width = exploredCloud.points.size();
 		exploredCloud.height = 1;
 		exploredCloud.is_dense = true;
-		exploredCloud.header.frame_id = "map";
+		exploredCloud.header.frame_id = this->frameId_;
 
 		sensor_msgs::PointCloud2 cloudMsg;
 		sensor_msgs::PointCloud2 exploredCloudMsg;
@@ -1418,7 +1426,7 @@ namespace mapManager{
 		cloud.width = cloud.points.size();
 		cloud.height = 1;
 		cloud.is_dense = true;
-		cloud.header.frame_id = "map";
+		cloud.header.frame_id = this->frameId_;
 
 		sensor_msgs::PointCloud2 cloudMsg;
 		pcl::toROSMsg(cloud, cloudMsg);
@@ -1460,7 +1468,7 @@ namespace mapManager{
 				}
 			}
 		}
-		mapMsg.header.frame_id = "map";
+		mapMsg.header.frame_id = this->frameId_;
 		mapMsg.header.stamp = ros::Time::now();
 		mapMsg.info.resolution = this->mapRes_;
 		mapMsg.info.width = maxRangeIdx(0);

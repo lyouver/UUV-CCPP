@@ -70,6 +70,7 @@ namespace mapManager{
 		std::string pointcloudTopicName_; // point cloud topic
 		std::string poseTopicName_;  // pose topic
 		std::string odomTopicName_; // odom topic 
+		std::string frameId_; // frame id used by visualization/public topics
 
 		// parameters
 		// -----------------------------------------------------------------
