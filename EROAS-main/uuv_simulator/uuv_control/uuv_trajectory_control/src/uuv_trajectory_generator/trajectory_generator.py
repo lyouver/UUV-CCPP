@@ -353,7 +353,12 @@ class TrajectoryGenerator(object):
             if len(self._points) == 0:
                 return None
 
-            time_array = np.asarray(self._time)
+            if self._time is None or len(self._time) != len(self._points):
+                # Keep time cache consistent with points to avoid race/mismatch.
+                self._time = [p.t for p in self._points]
+            time_array = np.asarray(self._time, dtype=float)
+            if time_array.size == 0:
+                return None
 
             # Interpolate the given trajectory
             self._this_pnt.t = t
@@ -361,32 +366,39 @@ class TrajectoryGenerator(object):
                 self._this_pnt.pos = deepcopy(self._points[0].pos)
                 self._this_pnt.rotq = deepcopy(self._points[0].rotq)
                 self._has_started = False
-                self._has_finished = False
-            if t >= self._points[-1].t:
+                self._is_finished = False
+            elif t >= self._points[-1].t:
                 self._this_pnt.pos = deepcopy(self._points[-1].pos)
                 self._this_pnt.rotq = deepcopy(self._points[-1].rotq)
-                self._has_started
+                self._has_started = True
                 self._is_finished = True
             else:
                 self._has_started = True
-                self._has_finished = False
+                self._is_finished = False
                 idx = np.argmin(np.abs(time_array - t))
-                if idx == 0:
-                    self._this_pnt = deepcopy(self._points[0])
+                if time_array[idx] >= t:
+                    i0 = max(0, idx - 1)
+                    i1 = idx
                 else:
-                    if t < self._points[idx].t:
-                        p_this = self._points[idx]
-                        p_last = self._points[idx - 1]
-                    else:
-                        p_this = self._points[idx + 1]
-                        p_last = self._points[idx]
+                    i0 = idx
+                    i1 = min(len(self._points) - 1, idx + 1)
+
+                if i0 == i1:
+                    self._this_pnt = deepcopy(self._points[i0])
+                else:
+                    p_last = self._points[i0]
+                    p_this = self._points[i1]
                     dt = p_this.t - p_last.t
-                    w1 = (t - p_last.t) / dt
-                    w0 = (p_this.t - t) / dt
-                    self._this_pnt.pos = w0*p_last.pos + w1*p_this.pos
-                    self._this_pnt.rotq = w0*p_last.rotq + w1*p_this.rotq
-                    self._this_pnt.vel = w0*p_last.vel + w1*p_this.vel
-                    self._this_pnt.acc = w0*p_last.acc + w1*p_this.acc
+                    if abs(dt) < 1e-9:
+                        self._this_pnt = deepcopy(p_this)
+                    else:
+                        w1 = (t - p_last.t) / dt
+                        w0 = (p_this.t - t) / dt
+                        self._this_pnt.pos = w0 * p_last.pos + w1 * p_this.pos
+                        self._this_pnt.rotq = w0 * p_last.rotq + w1 * p_this.rotq
+                        self._this_pnt.vel = w0 * p_last.vel + w1 * p_this.vel
+                        self._this_pnt.acc = w0 * p_last.acc + w1 * p_this.acc
+                self._this_pnt.t = t
         else:
             self._this_pnt = self._wp_interp.interpolate(t, *args)
 

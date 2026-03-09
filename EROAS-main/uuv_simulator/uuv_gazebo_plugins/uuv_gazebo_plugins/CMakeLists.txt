@@ -119,6 +119,12 @@ target_link_libraries(umbilical_plugin
   ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 list(APPEND UUV_GAZEBO_PLUGINS_LIST umbilical_plugin)
 
+add_library(uuv_oscillating_obstacle_plugin
+  src/OscillatingObstaclePlugin.cc)
+target_link_libraries(uuv_oscillating_obstacle_plugin
+  ${catkin_LIBRARIES})
+list(APPEND UUV_GAZEBO_PLUGINS_LIST uuv_oscillating_obstacle_plugin)
+
 #############
 ## Install ##
 #############
