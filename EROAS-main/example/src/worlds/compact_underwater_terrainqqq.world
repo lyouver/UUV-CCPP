@@ -150,12 +150,16 @@
     <!-- 球形障碍物：动态障碍，用于局部避障测试 -->
     <model name="moving_sphere_obstacle">
       <static>false</static>
-      <pose>-18.6811993142541 -5.72831446611001 -2.0 0 0 0</pose>
+      <pose>-32.7767673714281 -16.7254566681559 -2.72106390112852 0 0 0</pose>
       <plugin name="sphere_y_oscillator" filename="libuuv_oscillating_obstacle_plugin.so">
-        <!-- Keep oscillation range to +-2 m -->
+        <!-- Put obstacle on global waypoint #6 and move in a circle -->
+        <motion>circle</motion>
         <axis>1 0 0</axis>
-        <amplitude>2.0</amplitude>
-        <speed>0.2</speed>
+        <amplitude>1.9</amplitude>
+        <speed>0.8</speed>
+        <secondary_axis>0 1 0</secondary_axis>
+        <secondary_amplitude>1.9</secondary_amplitude>
+        <secondary_phase>0.0</secondary_phase>
       </plugin>
       <link name="link">
         <!-- Driven by plugin; keep it from falling under gravity -->

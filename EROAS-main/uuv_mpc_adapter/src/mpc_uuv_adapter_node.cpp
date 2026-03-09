@@ -7,6 +7,7 @@
 #include <uuv_control_msgs/TrajectoryPoint.h>
 #include <visualization_msgs/MarkerArray.h>
 
+#include <dynamic_predictor/utils.h>
 #include <map_manager/occupancyMap.h>
 #include <trajectory_planner/mpcPlanner.h>
 
@@ -126,6 +127,7 @@ class UuvMpcAdapterNode {
     pnh_.param<double>("local_rejoin_path_distance_threshold",
                        local_rejoin_path_distance_threshold_,
                        1.5);
+    pnh_.param<double>("predicted_lateral_speed_ratio", predicted_lateral_speed_ratio_, 0.6);
 
     pnh_.param<int>("max_obstacles", max_obstacles_, 8);
     pnh_.param<bool>("yaw_from_path", yaw_from_path_, true);
@@ -143,6 +145,7 @@ class UuvMpcAdapterNode {
     rejoin_hold_max_speed_ = std::max(0.0, rejoin_hold_max_speed_);
     local_rejoin_path_distance_threshold_ =
         std::max(0.0, local_rejoin_path_distance_threshold_);
+    predicted_lateral_speed_ratio_ = std::max(0.0, predicted_lateral_speed_ratio_);
   }
 
   static std::pair<double, double> parseVelocityXY(const std::string& text) {
@@ -456,6 +459,84 @@ class UuvMpcAdapterNode {
     return best;
   }
 
+  void buildPredictedObstacles(
+      const std::vector<Eigen::Vector3d>& ob_pos,
+      const std::vector<Eigen::Vector3d>& ob_vel,
+      const std::vector<Eigen::Vector3d>& ob_size,
+      std::vector<std::vector<std::vector<Eigen::Vector3d>>>& pred_pos,
+      std::vector<std::vector<std::vector<Eigen::Vector3d>>>& pred_size,
+      std::vector<Eigen::VectorXd>& intent_prob) const {
+    pred_pos.clear();
+    pred_size.clear();
+    intent_prob.clear();
+    if (ob_pos.empty()) {
+      return;
+    }
+
+    const int num_intent = dynamicPredictor::STOP + 1;
+    const int horizon = std::max(2, static_cast<int>(std::round(mpc_->getHorizon())));
+    const double dt = std::max(1e-3, mpc_dt_);
+
+    pred_pos.resize(ob_pos.size());
+    pred_size.resize(ob_pos.size());
+    intent_prob.resize(ob_pos.size());
+    for (std::size_t i = 0; i < ob_pos.size(); ++i) {
+      pred_pos[i].resize(num_intent);
+      pred_size[i].resize(num_intent);
+
+      const Eigen::Vector3d& p0 = ob_pos[i];
+      const Eigen::Vector3d& v0 = ob_vel[i];
+      const Eigen::Vector2d v_xy = v0.head<2>();
+      const double speed_xy = v_xy.norm();
+      Eigen::Vector2d t_hat(1.0, 0.0);
+      if (speed_xy > 1e-6) {
+        t_hat = v_xy / speed_xy;
+      }
+      const Eigen::Vector2d left_hat(-t_hat.y(), t_hat.x());
+      const double lateral_speed = predicted_lateral_speed_ratio_ * speed_xy;
+
+      Eigen::Vector3d v_forward = v0;
+      Eigen::Vector3d v_left(v0.x() + lateral_speed * left_hat.x(),
+                             v0.y() + lateral_speed * left_hat.y(),
+                             v0.z());
+      Eigen::Vector3d v_right(v0.x() - lateral_speed * left_hat.x(),
+                              v0.y() - lateral_speed * left_hat.y(),
+                              v0.z());
+      Eigen::Vector3d v_stop = Eigen::Vector3d::Zero();
+      if (speed_xy < 1e-3) {
+        v_forward = Eigen::Vector3d::Zero();
+        v_left = Eigen::Vector3d::Zero();
+        v_right = Eigen::Vector3d::Zero();
+      }
+
+      const Eigen::Vector3d intent_vel[4] = {v_forward, v_left, v_right, v_stop};
+      for (int intent = 0; intent < num_intent; ++intent) {
+        pred_pos[i][intent].reserve(horizon);
+        pred_size[i][intent].reserve(horizon);
+        for (int k = 0; k < horizon; ++k) {
+          const double t = static_cast<double>(k) * dt;
+          pred_pos[i][intent].push_back(p0 + intent_vel[intent] * t);
+          pred_size[i][intent].push_back(ob_size[i]);
+        }
+      }
+
+      Eigen::VectorXd prob(num_intent);
+      prob.setZero();
+      if (speed_xy < min_dynamic_obstacle_speed_) {
+        prob(dynamicPredictor::FORWARD) = 0.10;
+        prob(dynamicPredictor::LEFT) = 0.10;
+        prob(dynamicPredictor::RIGHT) = 0.10;
+        prob(dynamicPredictor::STOP) = 0.70;
+      } else {
+        prob(dynamicPredictor::FORWARD) = 0.55;
+        prob(dynamicPredictor::LEFT) = 0.20;
+        prob(dynamicPredictor::RIGHT) = 0.20;
+        prob(dynamicPredictor::STOP) = 0.05;
+      }
+      intent_prob[i] = prob / std::max(1e-6, prob.sum());
+    }
+  }
+
   std::vector<Eigen::Vector3d> buildFallbackTrajectory(const Eigen::Vector3d& curr_pos, int n_pts) const {
     std::vector<Eigen::Vector3d> out;
     if (dense_path_.empty()) {
@@ -760,13 +841,25 @@ class UuvMpcAdapterNode {
         const double d = std::max(0.2, 2.0 * ob.inflated_radius);
         ob_size.emplace_back(d, d, d);
       }
-      mpc_->updateDynamicObstacles(ob_pos, ob_vel, ob_size);
-      ok = mpc_->makePlan();
+      std::vector<std::vector<std::vector<Eigen::Vector3d>>> pred_pos;
+      std::vector<std::vector<std::vector<Eigen::Vector3d>>> pred_size;
+      std::vector<Eigen::VectorXd> intent_prob;
+      buildPredictedObstacles(ob_pos, ob_vel, ob_size, pred_pos, pred_size, intent_prob);
+      mpc_->updatePredObstacles(pred_pos, pred_size, intent_prob);
+      ok = mpc_->makePlanWithPred();
+      if (!ok) {
+        // Safety fallback: keep local avoidance alive even if intent-based solve fails.
+        mpc_->updateDynamicObstacles(ob_pos, ob_vel, ob_size);
+        ok = mpc_->makePlan();
+      }
       if (ok) {
         mpc_->getTrajectory(traj);
       }
     } else {
       std::vector<Eigen::Vector3d> empty;
+      std::vector<std::vector<std::vector<Eigen::Vector3d>>> empty_pred;
+      std::vector<Eigen::VectorXd> empty_prob;
+      mpc_->updatePredObstacles(empty_pred, empty_pred, empty_prob);
       mpc_->updateDynamicObstacles(empty, empty, empty);
     }
 
@@ -837,6 +930,7 @@ class UuvMpcAdapterNode {
   double local_clear_confirm_time_ = 1.0;
   double rejoin_hold_max_speed_ = 0.35;
   double local_rejoin_path_distance_threshold_ = 1.5;
+  double predicted_lateral_speed_ratio_ = 0.6;
   int max_obstacles_ = 8;
   bool yaw_from_path_ = true;
   bool publish_smoothed_global_path_ = true;

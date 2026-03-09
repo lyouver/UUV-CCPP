@@ -276,12 +276,14 @@ namespace trajPlanner{
 		dynamicObstaclesPosTemp.resize(obstaclesPos.size());
 		dynamicObstaclesSizeTemp.resize(obstaclesPos.size());
 		dynamicObstaclesVelTemp.resize(obstaclesPos.size());
+		const double tsSafe = std::max(1e-3, this->ts_);
 		for (int i=0; i<int(obstaclesPos.size()); ++i){
-			Eigen::Vector3d pos = obstaclesPos[i];
+			const Eigen::Vector3d pos = obstaclesPos[i];
             Eigen::Vector3d size = obstaclesSize[i];
-			Eigen::Vector3d vel = obstaclesVel[i];
+			const Eigen::Vector3d vel = obstaclesVel[i];
 			for (int j=0; j<this->horizon_; j++){
-				dynamicObstaclesPosTemp[i].push_back(pos);
+				const double t = static_cast<double>(j) * tsSafe;
+				dynamicObstaclesPosTemp[i].push_back(pos + vel * t);
 				dynamicObstaclesSizeTemp[i].push_back(size);
 				dynamicObstaclesVelTemp[i].push_back(vel);
 			}

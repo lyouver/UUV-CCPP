@@ -24,9 +24,9 @@
   <xacro:include filename="$(find uuv_descriptions)/urdf/rexrov.gazebo.xacro"/>
   <!-- Depth camera args -->
   <xacro:arg name="depth_camera_name" default="depth_camera"/>
-  <xacro:arg name="depth_camera_update_rate" default="30"/>
+  <xacro:arg name="depth_camera_update_rate" default="45"/>
   <xacro:arg name="depth_camera_min_range" default="0.2"/>
-  <xacro:arg name="depth_camera_max_range" default="12.0"/>
+  <xacro:arg name="depth_camera_max_range" default="15.0"/>
   <xacro:arg name="depth_camera_hfov" default="1.518436449"/> <!-- ~87 deg -->
   <xacro:arg name="depth_camera_image_width" default="640"/>
   <xacro:arg name="depth_camera_image_height" default="480"/>
