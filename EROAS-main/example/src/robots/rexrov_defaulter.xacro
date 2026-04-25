@@ -76,6 +76,26 @@
     <origin xyz="1.4 0 0.65" rpy="0 0 0"/>
   </joint>
 
+  <link name="$(arg namespace)/depth_camera_link_optical">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder length="0.000001" radius="0.000001"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 1.57079632679 0"/>
+    </collision>
+  </link>
+
+  <joint name="$(arg namespace)_depth_camera_optical_joint" type="fixed">
+    <parent link="$(arg namespace)/depth_camera_link"/>
+    <child link="$(arg namespace)/depth_camera_link_optical"/>
+    <origin xyz="0 0 0" rpy="-1.57079632679 0 -1.57079632679"/>
+  </joint>
+
   <gazebo reference="$(arg namespace)/depth_camera_link">
     <sensor name="$(arg namespace)_depth_camera" type="depth">
       <pose>0 0 0 0 0 0</pose>
@@ -105,7 +125,7 @@
         <depthImageTopicName>depth/image_raw</depthImageTopicName>
         <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
         <pointCloudTopicName>$(arg depth_camera_pointcloud_topic)</pointCloudTopicName>
-        <frameName>$(arg namespace)/depth_camera_link</frameName>
+        <frameName>$(arg namespace)/depth_camera_link_optical</frameName>
       </plugin>
     </sensor>
   </gazebo>

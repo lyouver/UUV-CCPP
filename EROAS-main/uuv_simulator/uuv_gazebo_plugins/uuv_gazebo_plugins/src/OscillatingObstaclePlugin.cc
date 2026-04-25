@@ -1,6 +1,7 @@
 // Move a model with configurable oscillatory motion.
 // Primary motion is a constant-speed triangle wave along `axis`.
 // Optional secondary motion is sinusoidal along `secondary_axis` for richer trajectories.
+// `square` motion follows four straight edges in the plane spanned by both axes.
 
 #include <cmath>
 #include <functional>
@@ -124,6 +125,48 @@ private:
       // Starts at initial pose and follows a circular/elliptic loop.
       const double offset1 = radius1 * std::sin(theta);
       const double offset2 = radius2 * (1.0 - std::cos(theta));
+      displacement = this->axis * offset1 + axis2 * offset2;
+    }
+    else if (this->motion == "square")
+    {
+      ignition::math::Vector3d axis2 = this->secondaryAxis;
+      if (axis2.Length() < 1e-9)
+      {
+        // Fallback axis orthogonal to primary axis.
+        if (std::abs(this->axis.Z()) < 0.9)
+          axis2 = this->axis.Cross(ignition::math::Vector3d(0, 0, 1));
+        else
+          axis2 = this->axis.Cross(ignition::math::Vector3d(0, 1, 0));
+        axis2.Normalize();
+      }
+
+      const double side1 = 2.0 * std::max(1e-6, A);
+      const double side2 =
+        2.0 * ((this->secondaryAmplitude > 1e-6) ? this->secondaryAmplitude : A);
+      const double perimeter = 2.0 * (side1 + side2);
+      const double distance = std::fmod(v * t, perimeter);
+
+      double offset1 = 0.0;
+      double offset2 = 0.0;
+      if (distance < side1)
+      {
+        offset1 = distance;
+      }
+      else if (distance < side1 + side2)
+      {
+        offset1 = side1;
+        offset2 = distance - side1;
+      }
+      else if (distance < 2.0 * side1 + side2)
+      {
+        offset1 = side1 - (distance - side1 - side2);
+        offset2 = side2;
+      }
+      else
+      {
+        offset2 = side2 - (distance - 2.0 * side1 - side2);
+      }
+
       displacement = this->axis * offset1 + axis2 * offset2;
     }
     else

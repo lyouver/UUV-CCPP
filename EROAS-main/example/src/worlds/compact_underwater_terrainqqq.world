@@ -147,12 +147,10 @@
       <pose>0 0 -25 0 0 0</pose>
     </include>
 
-    <!-- 球形障碍物：动态障碍，用于局部避障测试 -->
-    <model name="moving_sphere_obstacle">
+    <model name="moving_sphere_obstacle_1">
       <static>false</static>
-      <pose>-32.7767673714281 -16.7254566681559 -2.72106390112852 0 0 0</pose>
-      <plugin name="sphere_y_oscillator" filename="libuuv_oscillating_obstacle_plugin.so">
-        <!-- Put obstacle on global waypoint #6 and move in a circle -->
+      <pose>-5.30485650955445 2.74586934911605 2 0 0 0</pose>
+      <plugin name="sphere_1_oscillator" filename="libuuv_oscillating_obstacle_plugin.so">
         <motion>circle</motion>
         <axis>1 0 0</axis>
         <amplitude>1.9</amplitude>
@@ -162,7 +160,6 @@
         <secondary_phase>0.0</secondary_phase>
       </plugin>
       <link name="link">
-        <!-- Driven by plugin; keep it from falling under gravity -->
         <gravity>false</gravity>
         <kinematic>true</kinematic>
         <inertial>
@@ -196,6 +193,54 @@
         </visual>
       </link>
     </model>
+
+    <model name="moving_sphere_obstacle_2">
+      <static>false</static>
+      <pose>16.2056456617033 23.114221295412 -14.3338452718954 0 0 0</pose>
+      <plugin name="sphere_2_oscillator" filename="libuuv_oscillating_obstacle_plugin.so">
+        <motion>circle</motion>
+        <axis>-1 0 0</axis>
+        <amplitude>1.9</amplitude>
+        <speed>0.8</speed>
+        <secondary_axis>0 1 0</secondary_axis>
+        <secondary_amplitude>1.9</secondary_amplitude>
+        <secondary_phase>0.0</secondary_phase>
+      </plugin>
+      <link name="link">
+        <gravity>false</gravity>
+        <kinematic>true</kinematic>
+        <inertial>
+          <mass>50</mass>
+          <inertia>
+            <ixx>2.0</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>2.0</iyy>
+            <iyz>0.0</iyz>
+            <izz>2.0</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.8</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.8</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.1 0.8 0.1 1</ambient>
+            <diffuse>0.1 0.8 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
 
     <!-- 水下海流插件 -->
     <plugin name="underwater_current_plugin" filename="libuuv_underwater_current_ros_plugin.so">

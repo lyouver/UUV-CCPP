@@ -170,6 +170,11 @@ catkin_install_python(PROGRAMS
   scripts/path_publisher.py
   scripts/global_coverage_manager.py
   scripts/trajectory_to_ros.py
+  scripts/actual_path_recorder.py
+  scripts/chapter5_global_batch.py
+  scripts/chapter5_online_batch.py
+  scripts/chapter5_extract_online_metrics.py
+  scripts/chapter5_fake_obstacle_markers.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

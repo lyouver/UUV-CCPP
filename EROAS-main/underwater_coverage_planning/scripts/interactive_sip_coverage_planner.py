@@ -30,6 +30,8 @@ def _build_arg_parser() -> argparse.ArgumentParser:
 
     p.add_argument("--max-viewpoints", type=int, default=None, help="Cap sampled viewpoints")
     p.add_argument("--iterations", type=int, default=None, help="Iterative resampling rounds")
+    p.add_argument("--export-run", default="", help="Directory for chapter-5 experiment outputs")
+    p.add_argument("--export-stages", action="store_true", help="Export optimizer stage snapshots")
 
     p.add_argument("--max-forward-speed", type=float, default=None, help="UUV max forward speed (m/s)")
     p.add_argument("--max-vertical-speed", type=float, default=None, help="UUV max vertical speed (m/s)")
@@ -39,6 +41,7 @@ def _build_arg_parser() -> argparse.ArgumentParser:
 
     p.add_argument("--no-lkh", action="store_true", help="Disable LKH, force heuristic solver")
     p.add_argument("--no-open", action="store_true", help="Do not auto-open HTML")
+    p.add_argument("--no-html", action="store_true", help="Alias for --no-open in batch experiments")
     return p
 
 
@@ -52,7 +55,7 @@ def _load_config(args) -> PlannerConfig:
         max_viewpoints=args.max_viewpoints,
         resample_iterations=args.iterations,
         use_lkh=(False if args.no_lkh else None),
-        auto_open_html=(False if args.no_open else None),
+        auto_open_html=(False if (args.no_open or args.no_html) else None),
     )
 
     if args.max_forward_speed is not None:
@@ -76,8 +79,10 @@ def main() -> int:
 
     try:
         cfg = _load_config(args)
+        if args.export_run:
+            cfg.output_dir = os.path.join(os.path.abspath(args.export_run), "waypoints")
         planner = AdvancedSIPCoveragePlanner(cfg=cfg, heightmap_path=(args.heightmap or None))
-        planner.run()
+        planner.run(export_run_dir=(args.export_run or None), export_stages=bool(args.export_stages))
         return 0
     except Exception as exc:
         print(f"Error: {exc}")

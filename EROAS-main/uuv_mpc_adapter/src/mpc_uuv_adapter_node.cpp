@@ -121,7 +121,7 @@ class UuvMpcAdapterNode {
     pnh_.param<double>("rejoin_hold_time", rejoin_hold_time_, 2.5);
     pnh_.param<double>("rejoin_emergency_trigger_distance", rejoin_emergency_trigger_distance_, 2.5);
     pnh_.param<double>("global_pass_max_speed", global_pass_max_speed_, 0.5);
-    pnh_.param<double>("min_dynamic_obstacle_speed", min_dynamic_obstacle_speed_, 0.12);
+    pnh_.param<double>("min_dynamic_obstacle_speed", min_dynamic_obstacle_speed_, 0.5);
     pnh_.param<double>("local_clear_confirm_time", local_clear_confirm_time_, 1.0);
     pnh_.param<double>("rejoin_hold_max_speed", rejoin_hold_max_speed_, 0.35);
     pnh_.param<double>("local_rejoin_path_distance_threshold",
@@ -828,6 +828,7 @@ class UuvMpcAdapterNode {
     std::vector<Eigen::Vector3d> traj;
     bool use_mpc = (mode_ == PlanningMode::LOCAL_MPC);
     bool ok = false;
+    double local_planning_time_sec = 0.0;
     if (use_mpc) {
       std::vector<Eigen::Vector3d> ob_pos;
       std::vector<Eigen::Vector3d> ob_vel;
@@ -846,15 +847,22 @@ class UuvMpcAdapterNode {
       std::vector<Eigen::VectorXd> intent_prob;
       buildPredictedObstacles(ob_pos, ob_vel, ob_size, pred_pos, pred_size, intent_prob);
       mpc_->updatePredObstacles(pred_pos, pred_size, intent_prob);
+      const ros::WallTime local_plan_start = ros::WallTime::now();
       ok = mpc_->makePlanWithPred();
       if (!ok) {
         // Safety fallback: keep local avoidance alive even if intent-based solve fails.
         mpc_->updateDynamicObstacles(ob_pos, ob_vel, ob_size);
         ok = mpc_->makePlan();
       }
+      local_planning_time_sec = (ros::WallTime::now() - local_plan_start).toSec();
       if (ok) {
         mpc_->getTrajectory(traj);
       }
+      ROS_INFO("uuv_mpc_adapter local_mpc_solve_time_sec=%.6f ok=%d traj_points=%zu obstacles=%zu",
+               local_planning_time_sec,
+               ok ? 1 : 0,
+               traj.size(),
+               relevant_obs.size());
     } else {
       std::vector<Eigen::Vector3d> empty;
       std::vector<std::vector<std::vector<Eigen::Vector3d>>> empty_pred;
@@ -926,7 +934,7 @@ class UuvMpcAdapterNode {
   double rejoin_hold_time_ = 2.5;
   double rejoin_emergency_trigger_distance_ = 2.5;
   double global_pass_max_speed_ = 0.5;
-  double min_dynamic_obstacle_speed_ = 0.12;
+  double min_dynamic_obstacle_speed_ = 0.5;
   double local_clear_confirm_time_ = 1.0;
   double rejoin_hold_max_speed_ = 0.35;
   double local_rejoin_path_distance_threshold_ = 1.5;

@@ -3,11 +3,11 @@ inertial_frame_id: world
 odom_topic: /rexrov/pose_gt
 detector_velocity_topic: /onboard_detector/velocity_visualizaton
 output_trajectory_topic: /rexrov/dp_controller/input_trajectory
-global_waypoint_file: /home/tb/dave_ws/src/EROAS-main/example/src/scripts/guiji/trajectory_20260206waypoints.yaml
+global_waypoint_file: /home/tb/dave_ws/src/EROAS-main/underwater_coverage_planning/scripts/guiji/trajectory_20260223_190253_ros_waypoints.yaml
 smoothed_global_path_topic: /nav/global_path
 publish_smoothed_global_path: true
 
-plan_period: 0.10
+plan_period: 0.12
 trajectory_dt: 0.1
 mpc_dt: 0.1
 waypoint_resolution: 0.5
@@ -18,23 +18,23 @@ max_obstacles: 8
 default_obstacle_radius: 2.0
 yaw_from_path: true
 max_vel: 1.0
-max_acc: 1.0
-publish_epsilon: 0.2
+max_acc: 0.7
+publish_epsilon: 0.35
 publish_keepalive: 4.0
 robot_collision_radius: 0.6
-local_trigger_distance: 12.0
-local_release_distance: 13.0
-local_forward_window: 20.0
+local_trigger_distance: 8.0
+local_release_distance: 10.0
+local_forward_window: 14.0
 local_ignore_behind: 3.0
 local_max_duration: 15.0
-rejoin_hold_time: 4.5
+rejoin_hold_time: 3.0
 rejoin_emergency_trigger_distance: 2.5
-global_pass_max_speed: 1.0
-min_dynamic_obstacle_speed: 0.05
-local_clear_confirm_time: 1.8
+global_pass_max_speed: 1.25
+min_dynamic_obstacle_speed: 0.5
+local_clear_confirm_time: 1.5
 rejoin_hold_max_speed: 0.6
 local_rejoin_path_distance_threshold: 3
-predicted_lateral_speed_ratio: 0.6
+predicted_lateral_speed_ratio: 0.45
 
 # map_manager params used by internal occMap instance
 occupancy_map/sensor_input_mode: 1
@@ -46,16 +46,16 @@ occupancy_map/robot_size: [1.6, 1.0, 1.0]
 occupancy_map/depth_intrinsics: [554.254691191187, 554.254691191187, 320.5, 240.5]
 occupancy_map/depth_scale_factor: 10.0
 occupancy_map/depth_min_value: 0.2
-occupancy_map/depth_max_value: 20.0
+occupancy_map/depth_max_value: 15.0
 occupancy_map/depth_filter_margin: 0
 occupancy_map/depth_skip_pixel: 2
 occupancy_map/image_cols: 640
 occupancy_map/image_rows: 480
-occupancy_map/body_to_camera: [1.0, 0.0, 0.0, 0.0,
-                               0.0, 1.0, 0.0, 0.0,
-                               0.0, 0.0, 1.0, 0.0,
-                               0.0, 0.0, 0.0, 1.0]
-occupancy_map/raycast_max_length: 20.0
+occupancy_map/body_to_camera: [0.0,  0.0,  1.0,  1.4,
+                              -1.0,  0.0,  0.0,  0.0,
+                               0.0, -1.0,  0.0,  0.65,
+                               0.0,  0.0,  0.0,  1.0]
+occupancy_map/raycast_max_length: 15.0
 occupancy_map/p_hit: 0.70
 occupancy_map/p_miss: 0.35
 occupancy_map/p_min: 0.12
@@ -76,10 +76,10 @@ occupancy_map/visualize_global_map: false
 occupancy_map/verbose: false
 
 # trajectory_planner MPC params
-mpc_planner/horizon: 45
+mpc_planner/horizon: 50
 mpc_planner/z_range_min: -30.0
 mpc_planner/z_range_max: 5.0
-mpc_planner/static_safety_dist: 2.0
+mpc_planner/static_safety_dist: 1.5
 mpc_planner/dynamic_safety_dist: 2.5
 mpc_planner/static_constraint_slack_ratio: 0.1
 mpc_planner/dynamic_constraint_slack_ratio: 0.2

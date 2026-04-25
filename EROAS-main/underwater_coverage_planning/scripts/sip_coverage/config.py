@@ -56,6 +56,13 @@ class PlannerConfig:
     terrain_clearance: float = 0.3
     edge_sample_step: float = 2.0
 
+    # Coverage visibility metrics for chapter-5 experiments.
+    sensor_min_range: float = 0.2
+    sensor_max_range: float = 15.0
+    sensor_horizontal_fov_deg: float = 87.0
+    sensor_vertical_fov_deg: float = 58.0
+    sensor_max_incidence_deg: float = 65.0
+
     # Output.
     output_dir: Optional[str] = None
     auto_open_html: bool = True

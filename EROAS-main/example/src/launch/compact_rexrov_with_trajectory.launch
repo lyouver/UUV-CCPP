@@ -14,9 +14,10 @@
   <arg name="model_name" default="rexrov"/>
   <arg name="model_mode" default="nps_multibeam"/>
   <arg name="use_ned_frame" default="false"/>
-  <arg name="max_forward_speed" default="1.0"/>
+  <arg name="max_forward_speed" default="1.25"/>
   <arg name="example_src_dir" default="/home/tb/dave_ws/src/EROAS-main/example/src"/>
-  <arg name="global_waypoints_file" default="$(arg example_src_dir)/scripts/guiji/trajectory_20260206waypoints.yaml"/>
+  <arg name="global_waypoints_file" default="$(find underwater_coverage_planning)/scripts/guiji/trajectory_20260223_190253_ros_waypoints.yaml"/>
+  <arg name="local_mpc_param_file" default="$(arg example_src_dir)/config/local_mpc_adapter.yaml"/>
   <!-- Control whether the controller's trajectory_marker_publisher is launched -->
   <arg name="controller_gui" default="true"/>
   <!-- Official-style world first -->
@@ -24,12 +25,14 @@
   <arg name="use_custom_world" default="true"/>
   <arg name="use_message_to_tf" default="true"/>
   <arg name="show_detector_rviz" default="false"/>
+  <arg name="show_main_rviz" default="true"/>
+  <arg name="show_world_terrain_in_rviz" default="true"/>
   <!-- compatibility arg: backend selection removed, MPC is always enabled -->
   <arg name="planner_backend" default="mpc"/>
   <!-- only keep MPC backend -->
   <arg name="mpc_output_topic" default="/$(arg uuv_name)/dp_controller/input_trajectory"/>
   <!-- MPC tracking responsiveness tuning -->
-  <arg name="mpc_max_vel" default="1.0"/>
+  <arg name="mpc_max_vel" default="1.25"/>
   <arg name="mpc_max_acc" default="1.0"/>
   <arg name="mpc_plan_period" default="0.10"/>
   <!-- Use official UUV PID defaults -->
@@ -71,7 +74,15 @@
     <include file="$(find uuv_assistants)/launch/publish_world_ned_frame.launch"/>
   </group>
 
-  <!-- 地形模型发布已禁用：仅保留圆柱障碍物用于避障测试 -->
+  <group if="$(arg show_world_terrain_in_rviz)">
+    <node name="publish_world_models" pkg="uuv_assistants" type="publish_world_models.py" output="screen">
+      <rosparam param="meshes">
+        sand_heightmap:
+          model: sand_heightmap
+          mesh: package://uuv_gazebo_worlds/models/sand_heightmap/meshes/heightmap.dae
+      </rosparam>
+    </node>
+  </group>
 
   <!-- 启动RexROV机器人（NED），使用 example/src/robots 下的 xacro -->
   <group ns="$(arg uuv_name)">
@@ -92,7 +103,7 @@
     </group>
 
     <node name="urdf_spawner" pkg="uuv_descriptions" type="spawn_model" respawn="false" output="screen"
-          args="-urdf -x -30 -y -2 -z -2.5 -R 0 -P 0 -Y -0.2976788901 -model $(arg uuv_name) -param /$(arg uuv_name)/robot_description"/>
+          args="-urdf -x -23.734211757692528 -y 0.6230129985173737 -z 0.2129872184411612 -R 0 -P 0 -Y -0.7177055467 -model $(arg uuv_name) -param /$(arg uuv_name)/robot_description"/>
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen">
       <param name="robot_description" value="/$(arg uuv_name)/robot_description" />
@@ -136,10 +147,24 @@
   <!-- Don't patch uuv_simulator: override the controller's private param from here -->
   <param name="/$(arg uuv_name)/rov_pid_controller/max_forward_speed" value="$(arg max_forward_speed)"/>
 
+  <node name="actual_path_recorder"
+        pkg="underwater_coverage_planning"
+        type="actual_path_recorder.py"
+        output="screen">
+    <param name="uuv_name" value="$(arg uuv_name)"/>
+    <param name="odom_topic" value="/$(arg uuv_name)/pose_gt"/>
+    <param name="path_topic" value="/$(arg uuv_name)/actual_path"/>
+    <param name="path_frame_id" value="world"/>
+    <param name="min_point_distance" value="0.15"/>
+    <param name="max_points" value="50000"/>
+  </node>
+
   <!-- 启动RViz（NED配置） -->
-  <node name="rviz" pkg="rviz" type="rviz" output="screen" 
-        args="-d $(arg example_src_dir)/rviz/rexrov_trajectoryer.rviz"
-        launch-prefix="bash -c 'sleep 8; $0 $@' "/>
+  <group if="$(arg show_main_rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" 
+          args="-d $(arg example_src_dir)/rviz/rexrov_trajectoryer.rviz"
+          launch-prefix="bash -c 'sleep 8; $0 $@' "/>
+  </group>
 
   <group if="$(arg show_detector_rviz)">
     <node name="detector_rviz" pkg="rviz" type="rviz" output="screen"
@@ -152,7 +177,7 @@
         pkg="uuv_mpc_adapter"
         type="mpc_uuv_adapter_node"
         output="screen">
-    <rosparam file="$(arg example_src_dir)/config/local_mpc_adapter.yaml" command="load"/>
+    <rosparam file="$(arg local_mpc_param_file)" command="load"/>
     <param name="uuv_name" value="$(arg uuv_name)"/>
     <param name="global_waypoint_file" value="$(arg global_waypoints_file)"/>
     <param name="output_trajectory_topic" value="$(arg mpc_output_topic)"/>

@@ -26,28 +26,28 @@ waypoints:
   point:
   - -13.292278992697488
   - -5.697327235955191
-  - 2.0
+  - 0.0
   use_fixed_heading: false
 - heading: 0.0
   max_forward_speed: 0.8
   point:
   - -6.681375289661719
   - -5.279000702511788
-  - 2.0
+  - 0.0
   use_fixed_heading: false
 - heading: 0.0
   max_forward_speed: 0.8
   point:
   - -5.304856509554449
   - 2.7458693491160506
-  - 2.0
+  - 1.0
   use_fixed_heading: false
 - heading: 0.0
   max_forward_speed: 0.8
   point:
   - -5.064159992054312
   - 5.007877666444596
-  - 2.0
+  - 1.0
   use_fixed_heading: false
 - heading: 0.0
   max_forward_speed: 0.8

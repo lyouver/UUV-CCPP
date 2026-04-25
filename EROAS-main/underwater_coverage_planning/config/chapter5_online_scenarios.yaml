@@ -1,0 +1,57 @@
+scenarios:
+  - scenario_name: low_speed_single_dynamic_obstacle
+    world_launch: /home/tb/dave_ws/src/EROAS-main/example/src/launch/compact_rexrov_with_trajectory.launch
+    waypoint_file: /home/tb/dave_ws/src/EROAS-main/underwater_coverage_planning/scripts/guiji/trajectory_20260223_190253_ros_waypoints.yaml
+    detector_mode: fake
+    duration_sec: 120
+    repeat: 3
+    obstacle_profile:
+      obstacle_names: [moving_sphere_obstacle_1]
+      obstacle_radius: 2.0
+      nominal_speed: 0.2
+    mpc_overrides:
+      local_trigger_distance: 7.0
+      dynamic_safety_dist: 2.5
+
+  - scenario_name: medium_speed_single_dynamic_obstacle
+    world_launch: /home/tb/dave_ws/src/EROAS-main/example/src/launch/compact_rexrov_with_trajectory.launch
+    waypoint_file: /home/tb/dave_ws/src/EROAS-main/underwater_coverage_planning/scripts/guiji/trajectory_20260223_190253_ros_waypoints.yaml
+    detector_mode: fake
+    duration_sec: 120
+    repeat: 3
+    obstacle_profile:
+      obstacle_names: [moving_sphere_obstacle_2]
+      obstacle_radius: 2.0
+      nominal_speed: 0.5
+    mpc_overrides:
+      local_trigger_distance: 7.0
+      dynamic_safety_dist: 2.5
+
+  - scenario_name: crossing_dynamic_obstacles
+    world_launch: /home/tb/dave_ws/src/EROAS-main/example/src/launch/compact_rexrov_with_trajectory.launch
+    waypoint_file: /home/tb/dave_ws/src/EROAS-main/underwater_coverage_planning/scripts/guiji/trajectory_20260223_190253_ros_waypoints.yaml
+    detector_mode: fake
+    duration_sec: 150
+    repeat: 3
+    obstacle_profile:
+      obstacle_names: [moving_sphere_obstacle_1, moving_sphere_obstacle_2]
+      obstacle_radius: 2.0
+      nominal_speed: 0.4
+    mpc_overrides:
+      local_trigger_distance: 8.0
+      dynamic_safety_dist: 3.0
+
+  - scenario_name: dynamic_obstacle_with_static_terrain_constraints
+    world_launch: /home/tb/dave_ws/src/EROAS-main/example/src/launch/compact_rexrov_with_trajectory.launch
+    waypoint_file: /home/tb/dave_ws/src/EROAS-main/underwater_coverage_planning/scripts/guiji/trajectory_20260223_190253_ros_waypoints.yaml
+    detector_mode: fake
+    duration_sec: 150
+    repeat: 3
+    obstacle_profile:
+      obstacle_names: [moving_sphere_obstacle_3]
+      obstacle_radius: 2.0
+      nominal_speed: 0.35
+    mpc_overrides:
+      local_trigger_distance: 8.0
+      dynamic_safety_dist: 3.0
+      static_safety_dist: 2.5
